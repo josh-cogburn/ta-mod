@@ -208,6 +208,7 @@ class KeltnerChannel(IndicatorMixin):
         window_atr: int = 10,
         fillna: bool = False,
         original_version: bool = True,
+        multiplier_atr: float = 2.0
     ):
         self._high = high
         self._low = low
@@ -247,8 +248,8 @@ class KeltnerChannel(IndicatorMixin):
                 window=self._window_atr,
                 fillna=self._fillna,
             ).average_true_range()
-            self._tp_high = self._tp + (2 * atr)
-            self._tp_low = self._tp - (2 * atr)
+            self._tp_high = self._tp + (multiplier_atr * atr)
+            self._tp_low = self._tp - (multiplier_atr * atr)
 
     def keltner_channel_mband(self) -> pd.Series:
         """Keltner Channel Middle Band
